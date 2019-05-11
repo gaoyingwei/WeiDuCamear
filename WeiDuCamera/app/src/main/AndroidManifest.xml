@@ -19,6 +19,7 @@
         <activity android:name="com.bw.movie.view.SecondActivity"/>
         <activity android:name="com.bw.movie.view.LoginActivity"/>
         <activity android:name="com.bw.movie.view.RegistActivity"/>
+        <activity android:name=".view.HomeActivity"/>
     </application>
 
 </manifest>

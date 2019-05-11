@@ -44,4 +44,18 @@ dependencies {
     implementation 'io.reactivex:rxjava:1.2.1'
 
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
+
 }
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '27.1.1'    //此处填写你项目使用的sdk版本
+            }
+        }
+    }
+}
+

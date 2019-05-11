@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity implements ContarctIntface.
     @BindView(R.id.weixinlogin)
     ImageView weixinlogin;
     ContarctIntface.PresenterIntface presenterIntface;
+    SharedPreferences sp;
     String phone;
     String pwd;
     @Override
@@ -61,6 +62,17 @@ public class LoginActivity extends AppCompatActivity implements ContarctIntface.
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         presenterIntface=new MyPresenter<>(this);
+        //获取sp对象
+        sp=getSharedPreferences("config",MODE_PRIVATE);
+        //取值
+        boolean flagg = sp.getBoolean("flagg", false);
+        chePwd.setChecked(flagg);
+        if (flagg){
+            phone = sp.getString("phone", "");
+            pwd = sp.getString("pwd", "");
+            edPhone.setText(phone);
+            edPwd.setText(pwd);
+        }
     }
 
     @OnClick({R.id.ed_phone, R.id.ed_pwd, R.id.show_pwd, R.id.che_pwd, R.id.fly_reg, R.id.lin1, R.id.login, R.id.view_left, R.id.login_text_weixinlogin, R.id.view_right, R.id.qqlogin, R.id.weixinlogin})
@@ -85,6 +97,20 @@ public class LoginActivity extends AppCompatActivity implements ContarctIntface.
                 String pwd = edPwd.getText().toString();
                 String encrypt = EncryptUtil.encrypt(pwd);
                 presenterIntface.toLogin(phone,encrypt,encrypt);
+                if (phone.equals("")||pwd.equals("")){
+                    Toast.makeText(LoginActivity.this, "不能为空", Toast.LENGTH_SHORT).show();
+                }else {
+                    presenterIntface.toLogin(phone, encrypt, encrypt);
+                    SharedPreferences.Editor edit = sp.edit();
+                    if (chePwd.isChecked()) {
+                        edit.putString("phone", phone);
+                        edit.putString("pwd", pwd);
+                        edit.putBoolean("flagg", true);
+                    } else {
+                        edit.putBoolean("flagg", false);
+                    }
+                    edit.commit();
+                }
                 break;
             case R.id.view_left:
                 break;
@@ -113,5 +139,7 @@ public class LoginActivity extends AppCompatActivity implements ContarctIntface.
     public void ShowLogin(LoginBean loginBean) {
         String message = loginBean.getMessage();
         Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 }

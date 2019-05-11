@@ -1,4 +1,4 @@
-package com.wd.tech;
+package com.bw.movie;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

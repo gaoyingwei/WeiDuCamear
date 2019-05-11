@@ -1,4 +1,4 @@
-package com.wd.tech;
+package com.bw.movie;
 
 import org.junit.Test;
 

@@ -46,6 +46,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
 
     implementation 'com.jaeger.statusbarutil:library:1.4.0'
+    implementation 'com.chenlittleping:recyclercoverflow:1.0.6'
+
 
 }
 configurations.all {

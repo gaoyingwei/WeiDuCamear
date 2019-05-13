@@ -17,4 +17,9 @@ public class cameraFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_camera, container, false);
         return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
 }

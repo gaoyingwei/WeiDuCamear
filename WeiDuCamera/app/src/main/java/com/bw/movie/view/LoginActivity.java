@@ -141,5 +141,11 @@ public class LoginActivity extends AppCompatActivity implements ContarctIntface.
         Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, HomeActivity.class);
         startActivity(intent);
+        int userId = loginBean.getResult().getUserId();
+        String sessionId = loginBean.getResult().getSessionId();
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("userId", String.valueOf(userId));
+        edit.putString("sessionId",sessionId);
+        edit.commit();
     }
 }
